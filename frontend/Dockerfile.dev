@@ -1,0 +1,25 @@
+# Dockerfile pour le développement React avec hot reload
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Variables d'environnement
+ENV NODE_ENV=development
+ENV PATH /app/node_modules/.bin:$PATH
+ENV CHOKIDAR_USEPOLLING=true
+ENV WATCHPACK_POLLING=true
+
+# Copier les fichiers de dépendances
+COPY package*.json ./
+
+# Installer toutes les dépendances (dev + prod)
+RUN npm install
+
+# Copier le reste du code (sera overridé par le volume en dev)
+COPY . .
+
+# Exposer le port
+EXPOSE 3000
+
+# Commande de démarrage avec hot reload
+CMD ["npm", "start"]
