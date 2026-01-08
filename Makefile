@@ -2,9 +2,9 @@
 .PHONY: help build up down restart logs clean test migrate backup restore
 
 # Variables
-DOCKER_COMPOSE = docker-compose
-DOCKER_COMPOSE_DEV = docker-compose -f docker-compose.yml -f docker-compose.dev.yml
-DOCKER_COMPOSE_PROD = docker-compose -f docker-compose.yml -f docker-compose.prod.yml
+DOCKER_COMPOSE = docker compose
+DOCKER_COMPOSE_DEV = docker compose -f docker-compose.yml -f docker-compose.dev.yml
+DOCKER_COMPOSE_PROD = docker compose -f docker-compose.yml -f docker-compose.prod.yml
 
 # Couleurs pour l'output
 GREEN  := $(shell tput -Txterm setaf 2)
