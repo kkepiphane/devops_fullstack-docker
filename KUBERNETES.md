@@ -1,10 +1,10 @@
-# ☸️ Guide de Migration vers Kubernetes
+# Guide de Migration vers Kubernetes
 
 ## Vue d'ensemble
 
 Ce guide détaille comment migrer l'application Docker Compose vers Kubernetes pour une scalabilité et une résilience accrues.
 
-## 📊 Architecture Kubernetes
+## Architecture Kubernetes
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -29,7 +29,7 @@ Ce guide détaille comment migrer l'application Docker Compose vers Kubernetes p
    └──────┘ └─────┘ └──────┘
 ```
 
-## 🚀 Préparation de la Migration
+## Préparation de la Migration
 
 ### 1. Prérequis
 
@@ -84,7 +84,7 @@ k8s/
 └── kustomization.yaml         # Kustomize overlay
 ```
 
-## 📦 Manifests Kubernetes
+## Manifests Kubernetes
 
 ### Namespace
 
@@ -433,7 +433,7 @@ spec:
               number: 3000
 ```
 
-## 🔧 Helm Chart (Alternative)
+## Helm Chart (Alternative)
 
 ### Structure Helm
 
@@ -569,7 +569,7 @@ helm upgrade fullstack-app ./helm/fullstack-app \
 helm rollback fullstack-app 1 -n fullstack-app
 ```
 
-## 🔄 Migration Progressive
+## Migration Progressive
 
 ### Stratégie Blue-Green
 
@@ -601,7 +601,7 @@ spec:
   # ... même config que deployment principal
 ```
 
-## 📊 Monitoring sur Kubernetes
+## Monitoring sur Kubernetes
 
 ### Prometheus Operator
 
@@ -631,7 +631,7 @@ spec:
     interval: 30s
 ```
 
-## 🚀 Déploiement Complet
+## Déploiement Complet
 
 ### Script de Déploiement
 
@@ -644,59 +644,59 @@ set -e
 NAMESPACE="fullstack-app"
 ENVIRONMENT=${1:-production}
 
-echo "🚀 Deploying to Kubernetes ($ENVIRONMENT)..."
+echo "Deploying to Kubernetes ($ENVIRONMENT)..."
 
 # Créer le namespace
 kubectl create namespace $NAMESPACE --dry-run=client -o yaml | kubectl apply -f -
 
 # Appliquer les secrets
-echo "🔐 Creating secrets..."
+echo "Creating secrets..."
 kubectl apply -f k8s/base/secrets.yaml -n $NAMESPACE
 
 # Appliquer les ConfigMaps
-echo "⚙️ Creating configmaps..."
+echo "Creating configmaps..."
 kubectl apply -f k8s/base/configmap.yaml -n $NAMESPACE
 
 # Déployer la base de données
-echo "🗄️ Deploying database..."
+echo "Deploying database..."
 kubectl apply -f k8s/database/ -n $NAMESPACE
 kubectl rollout status statefulset/postgres -n $NAMESPACE
 
 # Déployer Redis
-echo "📦 Deploying Redis..."
+echo "Deploying Redis..."
 kubectl apply -f k8s/redis/ -n $NAMESPACE
 kubectl rollout status deployment/redis -n $NAMESPACE
 
 # Déployer le backend
-echo "🔧 Deploying backend..."
+echo "Deploying backend..."
 kubectl apply -f k8s/backend/ -n $NAMESPACE
 kubectl rollout status deployment/backend -n $NAMESPACE
 
 # Déployer Celery
-echo "⚙️ Deploying Celery..."
+echo "Deploying Celery..."
 kubectl apply -f k8s/celery/ -n $NAMESPACE
 kubectl rollout status deployment/celery -n $NAMESPACE
 
 # Déployer le frontend
-echo "🎨 Deploying frontend..."
+echo "Deploying frontend..."
 kubectl apply -f k8s/frontend/ -n $NAMESPACE
 kubectl rollout status deployment/frontend -n $NAMESPACE
 
 # Appliquer l'Ingress
-echo "🌐 Creating ingress..."
+echo "Creating ingress..."
 kubectl apply -f k8s/base/ingress.yaml -n $NAMESPACE
 
 # Vérifier le statut
-echo "✅ Deployment complete!"
+echo "Deployment complete!"
 kubectl get pods -n $NAMESPACE
 kubectl get services -n $NAMESPACE
 kubectl get ingress -n $NAMESPACE
 
-echo "🔍 To check logs: kubectl logs -f deployment/backend -n $NAMESPACE"
-echo "🌐 Application should be available at: https://yourdomain.com"
+echo "To check logs: kubectl logs -f deployment/backend -n $NAMESPACE"
+echo "Application should be available at: https://yourdomain.com"
 ```
 
-## 💡 Bonnes Pratiques Kubernetes
+## Bonnes Pratiques Kubernetes
 
 ### 1. Gestion des Resources
 
@@ -777,7 +777,7 @@ spec:
       port: 5432
 ```
 
-## 📚 Ressources
+## Ressources
 
 - [Kubernetes Documentation](https://kubernetes.io/docs/)
 - [Helm Documentation](https://helm.sh/docs/)

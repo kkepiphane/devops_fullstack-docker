@@ -1,4 +1,4 @@
-# 🔐 Guide de Sécurité Production
+# Guide de Sécurité Production
 
 ## Principes de Sécurité
 
@@ -32,7 +32,7 @@ L'architecture implémente plusieurs couches de sécurité:
 - Headers de sécurité automatiques
 - Rate limiting configuré
 
-## 🔑 Gestion des Secrets
+## Gestion des Secrets
 
 ### Génération de Secrets Forts
 
@@ -109,7 +109,7 @@ sed -i "s/$OLD_SECRET/$NEW_SECRET/" .env
 docker-compose restart backend
 ```
 
-## 🛡️ Sécurisation Nginx
+## Sécurisation Nginx
 
 ### Configuration SSL/TLS Renforcée
 
@@ -185,7 +185,7 @@ http {
 }
 ```
 
-## 🔐 Sécurité Backend
+## Sécurité Backend
 
 ### Authentification JWT Sécurisée
 
@@ -233,13 +233,13 @@ async def revoke_token(jti: str, exp: datetime):
 #### 1. SQL Injection
 
 ```python
-# ✅ BON - Utiliser SQLAlchemy ORM
+# BON - Utiliser SQLAlchemy ORM
 user = db.query(User).filter(User.email == email).first()
 
-# ✅ BON - Paramètres bindés
+# BON - Paramètres bindés
 db.execute(text("SELECT * FROM users WHERE email = :email"), {"email": email})
 
-# ❌ MAUVAIS - Concaténation de strings
+# MAUVAIS - Concaténation de strings
 db.execute(f"SELECT * FROM users WHERE email = '{email}'")
 ```
 
@@ -283,10 +283,10 @@ async def verify_csrf_token(
 import subprocess
 import shlex
 
-# ❌ MAUVAIS
+# MAUVAIS
 subprocess.run(f"ls {user_input}", shell=True)
 
-# ✅ BON
+# BON
 allowed_commands = ["ls", "pwd"]
 if command in allowed_commands:
     subprocess.run([command], shell=False)
@@ -324,7 +324,7 @@ class UserRegistration(BaseModel):
         return v
 ```
 
-## 🗄️ Sécurité Base de Données
+## Sécurité Base de Données
 
 ### Configuration PostgreSQL Sécurisée
 
@@ -394,7 +394,7 @@ class User(Base):
         return encrypted_field.decrypt(self.ssn)
 ```
 
-## 🔍 Audit et Monitoring de Sécurité
+## Audit et Monitoring de Sécurité
 
 ### Logging de Sécurité
 
@@ -469,7 +469,7 @@ async def send_security_alert(event: str, details: dict):
         await session.post(
             settings.SLACK_WEBHOOK_URL,
             json={
-                "text": f"🚨 Security Alert: {event}",
+                "text": f"Security Alert: {event}",
                 "attachments": [{
                     "color": "danger",
                     "fields": [
@@ -488,7 +488,7 @@ async def send_security_alert(event: str, details: dict):
     )
 ```
 
-## 🔄 Checklist de Sécurité Pre-Production
+## Checklist de Sécurité Pre-Production
 
 ### Infrastructure
 - [ ] Firewall configuré (UFW/iptables)
@@ -531,7 +531,7 @@ async def send_security_alert(event: str, details: dict):
 - [ ] Revue de code effectuée
 - [ ] Documentation à jour
 
-## 📚 Ressources
+## Ressources
 
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/)
 - [CIS Docker Benchmark](https://www.cisecurity.org/benchmark/docker)
