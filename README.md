@@ -357,16 +357,16 @@ Secrets requis:
 
 ### Checklist de Sécurité Production
 
-- [x] **Mots de passe forts** pour tous les services
-- [x] **SECRET_KEY** unique et complexe
-- [x] **HTTPS/TLS** avec certificats valides
-- [x] **Rate limiting** sur Nginx
-- [x] **Headers de sécurité** (HSTS, CSP, X-Frame-Options)
-- [x] **Utilisateurs non-root** dans les conteneurs
-- [x] **Firewall** configuré (UFW/iptables)
-- [x] **Backups** automatisés et testés
-- [x] **Logs** centralisés et monitorés
-- [x] **Scans de vulnérabilités** réguliers
+- **Mots de passe forts** pour tous les services
+- **SECRET_KEY** unique et complexe
+- **HTTPS/TLS** avec certificats valides
+- **Rate limiting** sur Nginx
+- **Headers de sécurité** (HSTS, CSP, X-Frame-Options)
+- **Utilisateurs non-root** dans les conteneurs
+- **Firewall** configuré (UFW/iptables)
+- **Backups** automatisés et testés
+- **Logs** centralisés et monitorés
+- **Scans de vulnérabilités** réguliers
 
 ### Configuration du Firewall
 
