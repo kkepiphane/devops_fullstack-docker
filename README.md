@@ -1,8 +1,8 @@
-# 🚀 Architecture Docker Full-Stack Production-Ready
+# Architecture Docker Full-Stack Production-Ready
 
 Architecture complète et robuste pour une application web full-stack containerisée avec FastAPI, React, PostgreSQL, et un stack d'observabilité complet.
 
-## 📋 Table des Matières
+## Table des Matières
 
 - [Vue d'ensemble](#vue-densemble)
 - [Stack Technique](#stack-technique)
@@ -17,22 +17,22 @@ Architecture complète et robuste pour une application web full-stack containeri
 - [Maintenance](#maintenance)
 - [Bonnes Pratiques](#bonnes-pratiques)
 
-## 🎯 Vue d'ensemble
+## Vue d'ensemble
 
 Cette architecture offre:
 
-- ✅ **Séparation des responsabilités** avec Nginx comme reverse proxy
-- ✅ **Scalabilité horizontale** avec support Kubernetes
-- ✅ **Sécurité robuste** avec JWT, HTTPS, headers de sécurité
-- ✅ **Observabilité complète** avec Prometheus + Grafana
-- ✅ **CI/CD automatisé** avec GitHub Actions
-- ✅ **Cache distribué** avec Redis
-- ✅ **Tâches asynchrones** avec Celery
-- ✅ **Backups automatisés** de la base de données
-- ✅ **Tests automatisés** backend et frontend
-- ✅ **Multi-environnements** (dev, staging, production)
+- **Séparation des responsabilités** avec Nginx comme reverse proxy
+- **Scalabilité horizontale** avec support Kubernetes
+- **Sécurité robuste** avec JWT, HTTPS, headers de sécurité
+- **Observabilité complète** avec Prometheus + Grafana
+- **CI/CD automatisé** avec GitHub Actions
+- **Cache distribué** avec Redis
+- **Tâches asynchrones** avec Celery
+- **Backups automatisés** de la base de données
+- **Tests automatisés** backend et frontend
+- **Multi-environnements** (dev, staging, production)
 
-## 🛠️ Stack Technique
+## Stack Technique
 
 ### Backend
 - **FastAPI** 0.109+ - Framework Python moderne et performant
@@ -57,7 +57,7 @@ Cette architecture offre:
 - **Prometheus** - Collecte de métriques
 - **Grafana** - Visualisation et dashboards
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -89,7 +89,7 @@ Cette architecture offre:
               └──────────┘
 ```
 
-## ⚙️ Prérequis
+## Prérequis
 
 - **Docker** 24.0+
 - **Docker Compose** 2.20+
@@ -98,13 +98,13 @@ Cette architecture offre:
 - Au moins **4GB RAM** disponible
 - **Ports disponibles**: 80, 443, 3000, 5432, 6379, 8000, 9090, 3001
 
-## 🚀 Installation Rapide
+## Installation Rapide
 
 ### 1. Cloner le repository
 
 ```bash
-git clone https://github.com/votre-org/fullstack-docker-app.git
-cd fullstack-docker-app
+git clone https://github.com/kkepiphane/devops_fullstack-docker.git
+cd devops_fullstack-docker
 ```
 
 ### 2. Configuration initiale
@@ -123,7 +123,7 @@ cp .env.example .env
 nano .env  # Modifier au minimum les mots de passe
 ```
 
-**⚠️ IMPORTANT**: Changez les valeurs suivantes:
+**IMPORTANT**: Changez les valeurs suivantes:
 - `DB_PASSWORD`
 - `REDIS_PASSWORD`
 - `SECRET_KEY` (générer avec `openssl rand -hex 32`)
@@ -149,7 +149,7 @@ make migrate
 - **Grafana**: http://localhost:3001 (admin / mot de passe du .env)
 - **Prometheus**: http://localhost:9090
 
-## 📝 Configuration
+## Configuration
 
 ### Variables d'Environnement
 
@@ -191,7 +191,7 @@ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
 make prod-up
 ```
 
-## 🎮 Utilisation
+## Utilisation
 
 ### Commandes Makefile
 
@@ -259,7 +259,7 @@ from app.tasks.example import send_email
 send_email.delay("user@example.com", "Welcome", "Hello!")
 ```
 
-## 🚢 Déploiement
+## Déploiement
 
 ### Déploiement sur Serveur VPS
 
@@ -277,7 +277,7 @@ sudo usermod -aG docker $USER
 
 ```bash
 cd /opt
-git clone https://github.com/votre-org/fullstack-docker-app.git app
+git clone https://github.com/votre-org/devops_fullstack-docker.git app
 cd app
 cp .env.example .env
 nano .env  # Configurer pour production
@@ -353,7 +353,7 @@ Secrets requis:
 - `PROD_HOST`, `PROD_USER`, `PROD_SSH_KEY`
 - `SLACK_WEBHOOK` (optionnel)
 
-## 🔒 Sécurité
+## Sécurité
 
 ### Checklist de Sécurité Production
 
@@ -389,7 +389,7 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
   aquasec/trivy image fullstack_backend:latest
 ```
 
-## 📊 Monitoring
+## Monitoring
 
 ### Prometheus
 
@@ -435,7 +435,7 @@ groups:
           summary: "High error rate detected"
 ```
 
-## 🔧 Maintenance
+## Maintenance
 
 ### Backups
 
@@ -510,109 +510,13 @@ make clean-all
 docker system prune -a
 ```
 
-## 💡 Bonnes Pratiques
-
-### Développement
-
-1. **Toujours travailler sur une branche**
-```bash
-git checkout -b feature/nouvelle-fonctionnalite
-```
-
-2. **Tester avant de commit**
-```bash
-make test
-make test-frontend
-```
-
-3. **Suivre les conventions de code**
-```bash
-# Backend
-black backend/app
-flake8 backend/app
-isort backend/app
-
-# Frontend
-cd frontend && npm run lint
-```
-
-4. **Utiliser les migrations pour la DB**
-```bash
-# Jamais de modifications manuelles
-make migrate-create
-```
-
-### Production
-
-1. **Monitorer les métriques clés**
-   - Latence P95, P99
-   - Taux d'erreur
-   - Utilisation ressources
-
-2. **Tester les backups régulièrement**
-```bash
-make backup
-make restore  # Sur un environnement de test
-```
-
-3. **Logs structurés**
-```python
-logger.info(
-    "User login",
-    extra={"user_id": user.id, "ip": request.client.host}
-)
-```
-
-4. **Rate limiting adaptatif**
-```nginx
-limit_req_zone $binary_remote_addr zone=api_limit:10m rate=10r/s;
-```
-
-### Sécurité
-
-1. **Rotation des secrets**
-```bash
-# Tous les 90 jours minimum
-openssl rand -hex 32  # Nouveau SECRET_KEY
-```
-
-2. **Audits de sécurité**
-```bash
-# Mensuel
-make security-scan
-```
-
-3. **Mise à jour des dépendances**
-```bash
-# Hebdomadaire
-pip list --outdated
-npm outdated
-```
-
-## 🤝 Contribution
-
-1. Fork le projet
-2. Créer une branche (`git checkout -b feature/AmazingFeature`)
-3. Commit les changements (`git commit -m 'Add AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
-
-## 📄 Licence
-
-MIT License - voir le fichier [LICENSE](LICENSE)
-
-## 👥 Auteurs
-
-- Votre Nom - [@votre_handle](https://twitter.com/votre_handle)
-
-## 🙏 Remerciements
 
 - [FastAPI](https://fastapi.tiangolo.com/)
 - [React](https://reactjs.org/)
 - [Docker](https://www.docker.com/)
 - [Prometheus](https://prometheus.io/)
 
-## 📚 Ressources
+## Ressources
 
 - [Documentation FastAPI](https://fastapi.tiangolo.com/)
 - [Docker Best Practices](https://docs.docker.com/develop/dev-best-practices/)
@@ -622,4 +526,4 @@ MIT License - voir le fichier [LICENSE](LICENSE)
 
 ---
 
-⭐ Si ce projet vous aide, n'hésitez pas à lui donner une étoile !
+Si ce projet vous aide, n'hésitez pas à lui donner une étoile !
